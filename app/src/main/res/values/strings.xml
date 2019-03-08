@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Elevator Application</string>
+
+    <string name="tab_menu_home">首页</string>
+    <string name="tab_menu_messge">消息</string>
+    <string name="tab_menu_tools">工具</string>
+    <string name="tab_menu_cleancircle">圈子</string>
+    <string name="tab_menu_mine">我的</string>
+</resources>
