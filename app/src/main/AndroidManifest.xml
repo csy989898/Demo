@@ -41,7 +41,8 @@
         <activity android:name=".Activity.Messge.MaintenanceActivity" />
         <activity android:name=".Activity.Messge.RemindActivity" />
         <activity android:name=".Activity.Messge.EmergencyrescueActivity" />
-        <activity android:name=".Activity.Messge.FaulthandlingActivity"></activity>
+        <activity android:name=".Activity.Messge.FaulthandlingActivity" />
+        <activity android:name=".Activity.mine.NewInfo_msgActivity"></activity>
     </application>
 
 </manifest>

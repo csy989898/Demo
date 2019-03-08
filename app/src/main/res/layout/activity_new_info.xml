@@ -6,7 +6,8 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@color/lightgray"
-    tools:context="com.example.mayn.elevatorapplication.Activity.NewInfoActivity">
+    tools:context="com.example.mayn.elevatorapplication.Activity.NewInfoActivity"
+    >
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_45"
@@ -26,14 +27,14 @@
             android:layout_centerInParent="true"
             android:padding="@dimen/dp_5"
             android:text="新信息通知"
+            android:textColor="@color/black"
             android:textSize="@dimen/sp_18" />
 
     </RelativeLayout>
     <LinearLayout
-        android:id="@+id/account_head"
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_40"
-        android:layout_marginTop="@dimen/dp_16"
+        android:layout_marginTop="@dimen/dp_25"
         android:orientation="horizontal"
         android:background="@color/white">
         <TextView
@@ -42,80 +43,85 @@
             android:layout_height="@dimen/dp_30"
             android:layout_marginLeft="@dimen/dp_20"
             android:gravity="center_vertical"
-            android:text="头像"
+            android:text="接收新信息通知"
+            android:textColor="@color/black"
             android:src="@mipmap/ic_launcher_round"/>
 
-        <ImageView
-            android:id="@+id/account_headimg"
+        <TextView
             android:layout_width="0dp"
             android:layout_weight="2"
+            android:text="以开启"
+            android:gravity="center"
             android:layout_height="@dimen/dp_30"
             android:layout_gravity="center"
-            android:src="@mipmap/ic_launcher_round"/>
-        <ImageView
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="@dimen/dp_30"
-            android:layout_gravity="center"
-            android:src="@mipmap/next"/>
+            />
     </LinearLayout>
-    <View
-        android:layout_width="wrap_content"
-        android:layout_height="@dimen/dp_0_5"
-        android:layout_marginLeft="@dimen/dp_20"
-        android:background="@color/gray"/>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
+        android:layout_marginTop="@dimen/dp_20"
         android:background="@color/white">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:gravity="center">
+            <LinearLayout
+                android:layout_width="@dimen/dp_0"
+                android:layout_weight="7"
+                android:orientation="vertical"
+                android:layout_height="@dimen/dp_61">
             <TextView
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="@dimen/dp_40"
-                android:text="姓名"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_30"
+                android:text="通知显示信息详情"
                 android:gravity="center_vertical"
+                android:textColor="@color/black"
                 android:layout_marginLeft="@dimen/dp_20" />
-            <TextView
-                android:id="@+id/account_name"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="@dimen/dp_40"
-                android:text="姓名"
-                android:gravity="right|center_vertical"
-                android:layout_marginRight="@dimen/dp_15"
-                android:layout_marginLeft="@dimen/dp_20" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp_30"
+                    android:text="若关闭，当收到信信息时，通知提示将不显示发信人和内容摘要"
+                    android:gravity="center_vertical"
+                    android:textSize="@dimen/sp_12"
+                    android:layout_marginLeft="@dimen/dp_20" />
+            </LinearLayout>
+            <Switch
+                android:id="@+id/swh_status"
+                android:layout_width="@dimen/dp_0"
+                android:layout_weight="2"
+                android:layout_height="wrap_content"
+                android:textOff=""
+                android:textOn=""
+                android:thumb="@drawable/thumb_selector"
+                android:track="@drawable/track_selctor" />
         </LinearLayout>
 
         <View
             android:layout_width="wrap_content"
-            android:layout_height="@dimen/dp_0_5"
-            android:layout_marginLeft="@dimen/dp_20"
-            android:background="@color/gray"/>
+            android:layout_height="@dimen/dp_15"
+            android:background="@color/lightgray"/>
         <LinearLayout
+            android:id="@+id/newinfo_msg"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
             <TextView
                 android:layout_width="0dp"
-                android:layout_weight="1"
+                android:layout_weight="8"
                 android:layout_height="@dimen/dp_40"
-                android:text="账号"
+                android:text="功能消息免打扰"
                 android:gravity="center_vertical"
+                android:textColor="@color/black"
                 android:layout_marginLeft="@dimen/dp_20" />
             <TextView
-                android:id="@+id/account_account"
                 android:layout_width="0dp"
                 android:layout_weight="1"
+                android:gravity="center"
                 android:layout_height="@dimen/dp_40"
-                android:text="12345677890"
-                android:gravity="right|center_vertical"
-                android:layout_marginRight="@dimen/dp_15"
-                android:layout_marginLeft="@dimen/dp_20" />
+               android:background="@mipmap/next" />
         </LinearLayout>
         <View
             android:layout_width="wrap_content"
@@ -123,52 +129,90 @@
             android:background="@color/lightgray"/>
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/dp_40"
             android:orientation="horizontal"
-            >
+            android:background="@color/white">
             <TextView
                 android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="@dimen/dp_40"
-                android:text="手机号"
+                android:layout_weight="7"
+                android:layout_height="@dimen/dp_30"
+                android:layout_marginLeft="@dimen/dp_20"
                 android:gravity="center_vertical"
-                android:layout_marginLeft="@dimen/dp_20" />
+                android:text="接收新信息通知"
+                android:textColor="@color/black"
+                android:src="@mipmap/ic_launcher_round"/>
+
             <TextView
-                android:id="@+id/account_phone"
                 android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="@dimen/dp_40"
-                android:text="1111111345"
-                android:gravity="right|center_vertical"
-                android:layout_marginRight="@dimen/dp_15"
-                android:layout_marginLeft="@dimen/dp_20" />
+                android:layout_weight="2"
+                android:text="以开启"
+                android:gravity="center"
+                android:layout_height="@dimen/dp_30"
+                android:layout_gravity="center"
+                />
         </LinearLayout>
 
         <View
             android:layout_width="wrap_content"
-            android:layout_height="@dimen/dp_0_5"
-            android:layout_marginLeft="@dimen/dp_20"
-            android:background="@color/gray"/>
+            android:layout_height="@dimen/dp_15"
+            android:background="@color/lightgray"/>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
             <TextView
-                android:layout_width="0dp"
-                android:layout_weight="1"
+                android:layout_width="@dimen/dp_0"
+                android:layout_weight="7"
                 android:layout_height="@dimen/dp_40"
-                android:text="邮箱"
+                android:text="声音"
+                android:textColor="@color/black"
                 android:gravity="center_vertical"
                 android:layout_marginLeft="@dimen/dp_20" />
-            <TextView
-                android:id="@+id/account_email"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="@dimen/dp_40"
-                android:text="15332234343@qq.com"
-                android:gravity="right|center_vertical"
-                android:layout_marginRight="@dimen/dp_15"
-                android:layout_marginLeft="@dimen/dp_20" />
+            <Switch
+                android:id="@+id/swh_status2"
+                android:layout_width="@dimen/dp_0"
+                android:layout_weight="2"
+                android:layout_height="wrap_content"
+                android:textOff=""
+                android:textOn=""
+                android:thumb="@drawable/thumb_selector"
+                android:track="@drawable/track_selctor" />
         </LinearLayout>
+        <View
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/dp_1"
+            android:layout_marginLeft="@dimen/dp_20"
+            android:background="@color/lightgray"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="@dimen/dp_0"
+                android:layout_weight="7"
+                android:layout_height="@dimen/dp_40"
+                android:text="震动"
+                android:textColor="@color/black"
+                android:gravity="center_vertical"
+                android:layout_marginLeft="@dimen/dp_20" />
+            <Switch
+                android:id="@+id/swh_status3"
+                android:layout_width="@dimen/dp_0"
+                android:layout_weight="2"
+                android:layout_height="wrap_content"
+                android:textOff=""
+                android:textOn=""
+                android:thumb="@drawable/thumb_selector"
+                android:track="@drawable/track_selctor" />
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_weight="1"
+            android:layout_height="@dimen/dp_40"
+            android:text="当维保助手在运行时，你可以设置是否需要声音或者震动"
+            android:gravity="center_vertical"
+            android:background="@color/lightgray"
+             />
     </LinearLayout>
 </LinearLayout>
