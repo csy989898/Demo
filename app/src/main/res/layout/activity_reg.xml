@@ -202,7 +202,7 @@
                 android:textSize="@dimen/sp_14" />
 
             <EditText
-                android:id="@+id/user__email_number"
+                android:id="@+id/user_emailnumber"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"

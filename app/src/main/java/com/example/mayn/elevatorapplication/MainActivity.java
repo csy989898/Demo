@@ -1,11 +1,14 @@
 package com.example.mayn.elevatorapplication;
 
+
+import android.content.SharedPreferences;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+
 
 public class MainActivity extends AppCompatActivity implements RadioGroup.OnCheckedChangeListener,
         ViewPager.OnPageChangeListener {
@@ -28,7 +31,7 @@ public class MainActivity extends AppCompatActivity implements RadioGroup.OnChec
     public static final int PAGE_THREE = 2;
     public static final int PAGE_FOUR = 3;
     public static final int PAGE_FIVE = 4;
-
+    private SharedPreferences sp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +40,12 @@ public class MainActivity extends AppCompatActivity implements RadioGroup.OnChec
         mAdapter = new MyFragmentPagerAdapter(getSupportFragmentManager());
         bindViews();
         rb_channel.setChecked(true);
+        sp=getSharedPreferences("userInfo", 0);
+        String name =sp.getString("USER_NAME", "");
+        boolean choseAutoLogin =sp.getBoolean("autologin1", false);
+        if(choseAutoLogin){
+            //Toast.makeText(MainActivity.this,"自动登录成功",Toast.LENGTH_LONG).show();
+        }
     }
 
     private void bindViews() {

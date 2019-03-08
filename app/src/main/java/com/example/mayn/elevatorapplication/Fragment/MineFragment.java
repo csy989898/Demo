@@ -1,6 +1,7 @@
 package com.example.mayn.elevatorapplication.Fragment;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -94,6 +95,7 @@ public class MineFragment extends Fragment implements View.OnClickListener {
                 startActivity(new Intent(getActivity(),AboutWeActivity.class));
                 break;
             case R.id.user_quit:
+                getActivity().finish();
                 setQuitAPP();
                 break;
         }
@@ -101,7 +103,10 @@ public class MineFragment extends Fragment implements View.OnClickListener {
 
     public void setQuitAPP(){
         /*清空数据*/
-        getActivity().finish();
+        /*SharedPreferences spout =getSharedPreferences("userInfo", 0);
+        SharedPreferences.Editor ed =spout.edit();
+        ed.clear();
+        ed.commit();*/
     }
 
 }
