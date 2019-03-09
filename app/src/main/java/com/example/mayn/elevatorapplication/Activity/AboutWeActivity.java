@@ -4,7 +4,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import com.example.mayn.elevatorapplication.R;
-
+/*
+* 关于我们
+* */
 public class AboutWeActivity extends AppCompatActivity {
 
     @Override

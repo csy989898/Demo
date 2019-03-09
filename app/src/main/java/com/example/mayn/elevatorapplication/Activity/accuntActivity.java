@@ -27,7 +27,9 @@ import com.example.mayn.elevatorapplication.R;
 import com.example.mayn.elevatorapplication.Utils.FileUtils;
 
 import java.io.File;
-
+/*
+* 账户与安全
+* */
 public class accuntActivity extends AppCompatActivity implements View.OnClickListener {
 
     private TextView mBack5;

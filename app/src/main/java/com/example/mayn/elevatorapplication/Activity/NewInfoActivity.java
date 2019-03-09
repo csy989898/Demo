@@ -9,7 +9,9 @@ import android.widget.TextView;
 
 import com.example.mayn.elevatorapplication.Activity.mine.NewInfo_msgActivity;
 import com.example.mayn.elevatorapplication.R;
-
+/*
+* 新消息通知
+* */
 public class NewInfoActivity extends AppCompatActivity implements View.OnClickListener {
 
     private TextView mInfoBack1;
