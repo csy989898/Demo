@@ -1,7 +1,6 @@
 package com.example.mayn.elevatorapplication.Fragment;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -10,11 +9,11 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.example.mayn.elevatorapplication.Activity.AboutWeActivity;
-import com.example.mayn.elevatorapplication.Activity.GeneralActivity;
-import com.example.mayn.elevatorapplication.Activity.NewInfoActivity;
-import com.example.mayn.elevatorapplication.Activity.PrivacyActivity;
-import com.example.mayn.elevatorapplication.Activity.accuntActivity;
+import com.example.mayn.elevatorapplication.Activity.mine.AboutWeActivity;
+import com.example.mayn.elevatorapplication.Activity.mine.GeneralActivity;
+import com.example.mayn.elevatorapplication.Activity.mine.NewInfoActivity;
+import com.example.mayn.elevatorapplication.Activity.mine.PrivacyActivity;
+import com.example.mayn.elevatorapplication.Activity.mine.accuntActivity;
 import com.example.mayn.elevatorapplication.R;
 
 public class MineFragment extends Fragment implements View.OnClickListener {

@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@color/lightgray"
-    tools:context="com.example.mayn.elevatorapplication.Activity.PrivacyActivity">
+    tools:context="com.example.mayn.elevatorapplication.Activity.mine.PrivacyActivity">
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_45"

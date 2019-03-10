@@ -13,7 +13,6 @@ import com.example.mayn.elevatorapplication.Activity.Messge.FaulthandlingActivit
 import com.example.mayn.elevatorapplication.Activity.Messge.InfoActivity;
 import com.example.mayn.elevatorapplication.Activity.Messge.MaintenanceActivity;
 import com.example.mayn.elevatorapplication.Activity.Messge.RemindActivity;
-import com.example.mayn.elevatorapplication.Activity.NewInfoActivity;
 import com.example.mayn.elevatorapplication.R;
 
 public class MessgeFragment extends Fragment implements View.OnClickListener {

@@ -3,6 +3,7 @@ package com.example.mayn.elevatorapplication;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.CheckBox;
@@ -64,6 +65,15 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         //如果上次登录选了自动登录，那进入登录页面也自动勾选自动登录
         if(choseAutoLogin){
             mLoginAuto.setChecked(true);
+            Toast.makeText(LoginActivity.this, "3秒后自动登录",
+                    Toast.LENGTH_SHORT).show();
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    startActivity(new Intent(LoginActivity.this,MainActivity.class));
+                    LoginActivity.this.finish();
+                }
+            }, 3000);
         }
 
         mLoginLoginbtn.setOnClickListener(new View.OnClickListener() {

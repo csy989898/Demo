@@ -1,4 +1,4 @@
-package com.example.mayn.elevatorapplication.Activity;
+package com.example.mayn.elevatorapplication.Activity.mine;
 
 import android.app.AlertDialog;
 import android.content.ContentUris;

@@ -1,4 +1,4 @@
-package com.example.mayn.elevatorapplication.Activity;
+package com.example.mayn.elevatorapplication.Activity.mine;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -7,7 +7,7 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.example.mayn.elevatorapplication.Activity.mine.NewInfo_msgActivity;
+import com.example.mayn.elevatorapplication.Activity.mine.chrid_view.NewInfo_msgActivity;
 import com.example.mayn.elevatorapplication.R;
 /*
 * 新消息通知

@@ -1,4 +1,4 @@
-package com.example.mayn.elevatorapplication.Activity;
+package com.example.mayn.elevatorapplication.Activity.mine;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;

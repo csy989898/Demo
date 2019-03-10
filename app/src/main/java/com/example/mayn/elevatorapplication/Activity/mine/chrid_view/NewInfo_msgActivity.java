@@ -1,4 +1,4 @@
-package com.example.mayn.elevatorapplication.Activity.mine;
+package com.example.mayn.elevatorapplication.Activity.mine.chrid_view;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
