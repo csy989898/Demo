@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal">
+    <com.example.mayn.elevatorapplication.View.PickerView
+        android:background="@color/white"
+        android:id="@+id/picker_view"
+        android:layout_width="@dimen/dp_0"
+        android:layout_weight="8"
+        android:layout_height="@dimen/dp_150" />
+    <TextView
+        android:textColor="#111111"
+        android:id="@+id/confirm"
+        android:gravity="center"
+        android:text="确定"
+        android:textSize="14sp"
+        android:layout_width="@dimen/dp_0"
+        android:layout_weight="2"
+        android:layout_height="@dimen/dp_150" />
+
+</LinearLayout>

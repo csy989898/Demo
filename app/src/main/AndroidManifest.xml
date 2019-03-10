@@ -54,6 +54,14 @@
         <activity android:name=".Activity.mine.chrid_view.RealNameMessgeActivity" />
         <activity android:name=".Activity.mine.chrid_view.Question_Message" />
         <activity android:name=".Fragment.fragment_home.Fragment_tuijian"></activity>
+        <activity android:name=".ui.XListViewActivity">
+            <!--<intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>-->
+        </activity>
+        <activity android:name=".ui.XScrollViewActivity"/>
     </application>
 
 </manifest>

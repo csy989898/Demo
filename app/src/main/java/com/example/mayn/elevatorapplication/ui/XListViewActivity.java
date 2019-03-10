@@ -1,22 +1,13 @@
-package com.example.mayn.elevatorapplication.Fragment.fragment_home;
+package com.example.mayn.elevatorapplication.ui;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.os.Handler;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.AdapterView;
+import android.os.Handler;
 import android.widget.ArrayAdapter;
-import android.widget.Toast;
 
 import com.example.mayn.elevatorapplication.R;
-import com.example.mayn.elevatorapplication.ui.XListViewActivity;
 import com.example.mayn.elevatorapplication.widget.XListView;
 
 import java.text.SimpleDateFormat;
@@ -24,7 +15,10 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
 
-public class Fragment_tuijian extends Fragment implements XListView.IXListViewListener {
+/**
+ * XListView
+ */
+public class XListViewActivity extends Activity implements XListView.IXListViewListener {
     private XListView mListView;
 
     private ArrayAdapter<String> mAdapter;
@@ -40,42 +34,32 @@ public class Fragment_tuijian extends Fragment implements XListView.IXListViewLi
         context.startActivity(intent);
     }
 
-    private  View view;
-        private Context mcontext;
-
-    public Fragment_tuijian() {}
-
-    @Nullable
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-       view=inflater.inflate(R.layout.fragment_tuijian,null);
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.act_list_view);
         geneItems();
         initView();
-       return view;
     }
+
     private void initView() {
         mHandler = new Handler();
 
-        mListView = (XListView) view.findViewById(R.id.list_view);
+        mListView = (XListView) findViewById(R.id.list_view);
         mListView.setPullRefreshEnable(true);
         mListView.setPullLoadEnable(true);
         mListView.setAutoLoadEnable(true);
         mListView.setXListViewListener(this);
         mListView.setRefreshTime(getTime());
 
-        mAdapter = new ArrayAdapter<String>(getActivity(), R.layout.vw_list_item, items);
+        mAdapter = new ArrayAdapter<String>(this, R.layout.vw_list_item, items);
         mListView.setAdapter(mAdapter);
-        mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(getActivity(),"item"+position,Toast.LENGTH_SHORT).show();
-            }
-        });
     }
 
     @Override
     public void onWindowFocusChanged(boolean hasFocus) {
-        super.getActivity().onWindowFocusChanged(hasFocus);
+        super.onWindowFocusChanged(hasFocus);
+
         if (hasFocus) {
             mListView.autoRefresh();
         }
@@ -89,7 +73,7 @@ public class Fragment_tuijian extends Fragment implements XListView.IXListViewLi
                 mIndex = ++mRefreshIndex;
                 items.clear();
                 geneItems();
-                mAdapter = new ArrayAdapter<String>(getActivity(), R.layout.vw_list_item,
+                mAdapter = new ArrayAdapter<String>(XListViewActivity.this, R.layout.vw_list_item,
                         items);
                 mListView.setAdapter(mAdapter);
                 onLoad();
@@ -111,7 +95,7 @@ public class Fragment_tuijian extends Fragment implements XListView.IXListViewLi
 
     private void geneItems() {
         for (int i = 0; i != 20; ++i) {
-            items.add("ListView item " + (++mIndex));
+            items.add("Test XListView item " + (++mIndex));
         }
     }
 
