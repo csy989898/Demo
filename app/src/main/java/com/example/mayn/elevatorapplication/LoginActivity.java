@@ -41,7 +41,11 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
      */
     private TextView mLoginCustomer;
     private SharedPreferences sp;
-    private String userNameValue,passwordValue;
+    private String userNameValue, passwordValue;
+    /**
+     * 注册
+     */
+    private TextView mBackReg;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,28 +53,28 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         setContentView(R.layout.activity_login);
         initView();
         sp = getSharedPreferences("userInfo", 0);
-        String name=sp.getString("USER_NAME", "");
-        String pass =sp.getString("PASSWORD", "");
+        String name = sp.getString("USER_NAME", "");
+        String pass = sp.getString("PASSWORD", "");
 
-        boolean choseRemember =sp.getBoolean("cbRememberPass", false);
-        boolean choseAutoLogin =sp.getBoolean("autologin1", false);
+        boolean choseRemember = sp.getBoolean("cbRememberPass", false);
+        boolean choseAutoLogin = sp.getBoolean("autologin1", false);
 
 
         //如果上次选了记住密码，那进入登录页面也自动勾选记住密码，并填上用户名和密码
-        if(choseRemember){
+        if (choseRemember) {
             mLoginName.setText(name);
             mLoginPasswd.setText(pass);
             mLoginRember.setChecked(true);
         }
         //如果上次登录选了自动登录，那进入登录页面也自动勾选自动登录
-        if(choseAutoLogin){
+        if (choseAutoLogin) {
             mLoginAuto.setChecked(true);
             Toast.makeText(LoginActivity.this, "3秒后自动登录",
                     Toast.LENGTH_SHORT).show();
             new Handler().postDelayed(new Runnable() {
                 @Override
                 public void run() {
-                    startActivity(new Intent(LoginActivity.this,MainActivity.class));
+                    startActivity(new Intent(LoginActivity.this, MainActivity.class));
                     LoginActivity.this.finish();
                 }
             }, 3000);
@@ -83,7 +87,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             public void onClick(View arg0) {
                 userNameValue = mLoginName.getText().toString();
                 passwordValue = mLoginPasswd.getText().toString();
-                SharedPreferences.Editor editor =sp.edit();
+                SharedPreferences.Editor editor = sp.edit();
 
                 if (userNameValue.equals("demo")
                         && passwordValue.equals("123")) {
@@ -95,17 +99,17 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     editor.putString("PASSWORD", passwordValue);
 
                     //是否记住密码
-                    if(mLoginRember.isChecked()){
+                    if (mLoginRember.isChecked()) {
                         editor.putBoolean("cbRememberPass", true);
-                    }else{
+                    } else {
                         editor.putBoolean("cbRememberPass", false);
                     }
 
 
                     //是否自动登录
-                    if(mLoginAuto.isChecked()){
+                    if (mLoginAuto.isChecked()) {
                         editor.putBoolean("autologin1", true);
-                    }else{
+                    } else {
                         editor.putBoolean("autologin1", false);
                     }
                     editor.commit();
@@ -146,9 +150,12 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 startActivity(new Intent(LoginActivity.this, MainActivity.class));
                 finish();
                 break;
+            case R.id.back_reg:
+                startActivity(new Intent(LoginActivity.this, RegActivity.class));
+                finish();
+                break;
         }
     }
-
 
 
     private void initView() {
@@ -162,5 +169,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         mLoginRegBtn.setOnClickListener(this);
         mLoginCustomer = (TextView) findViewById(R.id.login_customer);
         mLoginCustomer.setOnClickListener(this);
+        mBackReg = (TextView) findViewById(R.id.back_reg);
+        mBackReg.setOnClickListener(this);
     }
 }

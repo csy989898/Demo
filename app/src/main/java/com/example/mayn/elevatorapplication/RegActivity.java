@@ -43,7 +43,12 @@ public class RegActivity extends AppCompatActivity implements View.OnClickListen
      * 注册
      */
     private TextView mUserRegbtn;
-    private int num=0;
+    private int num = 0;
+    /**
+     * 登录
+     */
+    private TextView mBackLogin;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,55 +65,55 @@ public class RegActivity extends AppCompatActivity implements View.OnClickListen
                 break;
             case R.id.yanzm_btn:
                 num = (int) ((Math.random() * 9 + 1) * 100000);
-                Toast.makeText(RegActivity.this, "验证码为"+num,
+                Toast.makeText(RegActivity.this, "验证码为" + num,
                         Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.back_login:
+                startActivity(new Intent(RegActivity.this,LoginActivity.class));
+                finish();
                 break;
         }
     }
 
-    public void setRegDate(){
-        String UserRegname=mUserName.getText().toString().trim();
-        String UserRegPasswd=mUserPasswd.getText().toString().trim();
-        String UserRegRepasswd=mUserRepasswd.getText().toString().trim();
-        String UserRegEmail=mUserEmail.getText().toString().trim();
-        String UserRegYZM=mUserEmailnumber.getText().toString().trim();
+    public void setRegDate() {
+        String UserRegname = mUserName.getText().toString().trim();
+        String UserRegPasswd = mUserPasswd.getText().toString().trim();
+        String UserRegRepasswd = mUserRepasswd.getText().toString().trim();
+        String UserRegEmail = mUserEmail.getText().toString().trim();
+        String UserRegYZM = mUserEmailnumber.getText().toString().trim();
         String strPattern = "^[a-zA-Z0-9][\\w\\.-]*[a-zA-Z0-9]@[a-zA-Z0-9][\\w\\.-]*[a-zA-Z0-9]\\.[a-zA-Z][a-zA-Z\\.]*[a-zA-Z]$";
-        if(TextUtils.isEmpty(UserRegname)){
+        if (TextUtils.isEmpty(UserRegname)) {
             Toast.makeText(RegActivity.this, "请输入账号",
                     Toast.LENGTH_SHORT).show();
-        }else
-        if(TextUtils.isEmpty(UserRegPasswd)){
+        } else if (TextUtils.isEmpty(UserRegPasswd)) {
             Toast.makeText(RegActivity.this, "请输入密码",
                     Toast.LENGTH_SHORT).show();
-        }else
-        if(!UserRegRepasswd.equals(UserRegPasswd)){
+        } else if (!UserRegRepasswd.equals(UserRegPasswd)) {
             Toast.makeText(RegActivity.this, "请重新输入密码",
                     Toast.LENGTH_SHORT).show();
-        }else{
-            if(TextUtils.isEmpty(UserRegEmail)){
+        } else {
+            if (TextUtils.isEmpty(UserRegEmail)) {
                 Toast.makeText(RegActivity.this, "请输入邮箱",
                         Toast.LENGTH_SHORT).show();
-            }else{
-                    if(!isEmail(UserRegEmail)){
-                        Toast.makeText(RegActivity.this, "邮箱格式错误",
-                                Toast.LENGTH_SHORT).show();
-                    }else
-                        if (TextUtils.isEmpty(UserRegYZM)) {
-                            Toast.makeText(RegActivity.this, "请输入验证码",
-                                    Toast.LENGTH_SHORT).show();
-                        } else if (!UserRegYZM.equals(num + "")) {
-                            Toast.makeText(RegActivity.this, "验证码错误",
-                                    Toast.LENGTH_SHORT).show();
-                        } else if(!mUserCheckbox.isChecked()){
-                            Toast.makeText(RegActivity.this, "是否同意服务协议",
-                                    Toast.LENGTH_SHORT).show();
-                        }else{
-                            startActivity(new Intent(RegActivity.this, LoginActivity.class));
-                            finish();
-                        }
+            } else {
+                if (!isEmail(UserRegEmail)) {
+                    Toast.makeText(RegActivity.this, "邮箱格式错误",
+                            Toast.LENGTH_SHORT).show();
+                } else if (TextUtils.isEmpty(UserRegYZM)) {
+                    Toast.makeText(RegActivity.this, "请输入验证码",
+                            Toast.LENGTH_SHORT).show();
+                } else if (!UserRegYZM.equals(num + "")) {
+                    Toast.makeText(RegActivity.this, "验证码错误",
+                            Toast.LENGTH_SHORT).show();
+                } else if (!mUserCheckbox.isChecked()) {
+                    Toast.makeText(RegActivity.this, "是否同意服务协议",
+                            Toast.LENGTH_SHORT).show();
+                } else {
+                    startActivity(new Intent(RegActivity.this, LoginActivity.class));
+                    finish();
+                }
 
             }
-
 
 
         }
@@ -134,9 +139,11 @@ public class RegActivity extends AppCompatActivity implements View.OnClickListen
         mYanzmBtn = (TextView) findViewById(R.id.yanzm_btn);
         mYanzmBtn.setOnClickListener(this);
         mUserEmailnumber = (EditText) findViewById(R.id.user_emailnumber);
-        mUserCheckbox = (CheckBox) findViewById(R.id.user_checkbox);
+        //mUserCheckbox = (CheckBox) findViewById(R.id.user_checkbox);
         mUserRegbtn = (TextView) findViewById(R.id.user_regbtn);
         mUserRegbtn.setOnClickListener(this);
+        mBackLogin = (TextView) findViewById(R.id.back_login);
+        mBackLogin.setOnClickListener(this);
     }
 
 }
