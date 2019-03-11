@@ -22,15 +22,15 @@
 
 
     <string-array name="rearch">
-        <item >e1</item>
-        <item >e2</item>
-        <item >e3</item>
-        <item >e4</item>
-        <item >e5</item>
-        <item >e6</item>
-        <item >e7</item>
-        <item >e8</item>
-        <item >e9</item>
-        <item >e10</item>
+        <item>e1</item>
+        <item>e2</item>
+        <item>e3</item>
+        <item>e4</item>
+        <item>e5</item>
+        <item>e6</item>
+        <item>e7</item>
+        <item>e8</item>
+        <item>e9</item>
+        <item>e10</item>
     </string-array>
 </resources>

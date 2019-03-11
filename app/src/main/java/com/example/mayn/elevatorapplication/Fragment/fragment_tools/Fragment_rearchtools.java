@@ -1,11 +1,17 @@
 package com.example.mayn.elevatorapplication.Fragment.fragment_tools;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -14,8 +20,9 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.example.mayn.elevatorapplication.R;
+import com.example.mayn.elevatorapplication.View.WheelView;
 
-import java.util.Random;
+import java.util.Arrays;
 
 public class Fragment_rearchtools extends Fragment implements View.OnClickListener {
     private View view;
@@ -45,6 +52,11 @@ public class Fragment_rearchtools extends Fragment implements View.OnClickListen
             "eeeeeeee5","eeeeeeee6","eeeeeeeeee7","eeeeeeeeee8","eeeeeeeee9","eeeeeeeee10"};
 
     private int num=1;
+
+/*文本选择器*/
+    private static final String TAG = Fragment_rearchtools.class.getSimpleName();
+    private static final String[] PLANETS = new String[]{"Mercury", "Venus", "Earth", "Mars", "Jupiter", "Uranus", "Neptune", "Pluto"};
+    private static final String[] SIZE = new String[]{"SIZE1", "ABOUT", "BALANCE", "CHART", "DANCE", "ENCH", "FLANCH", "GREEN"};
 
     @Nullable
     @Override
@@ -110,13 +122,31 @@ public class Fragment_rearchtools extends Fragment implements View.OnClickListen
         });
     }
 
+    public void setpickerDate(){
+        WheelView wheelView=new WheelView(getContext());
+        wheelView.setOffset(1);
+        wheelView.setItems(Arrays.asList(PLANETS));
+        wheelView.setOnWheelViewListener(new WheelView.OnWheelViewListener(){
+            @Override
+            public void onSelected(int selectedIndex, String item) {
+                mToolsName.setText(""+item);
+                Log.e("WheelView","WheelView--文本选择器");
+                Log.d(TAG, "selectedIndex: " + selectedIndex + ", item: " + item);
+               //super.onSelected(selectedIndex, item);
+            }
+        });
+
+    }
+
+
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
             default:
                 break;
-            case R.id.tools_name:
-               /* String[] strings=new String[new Random().nextInt(50)+10];
+            /*case R.id.tools_name:
+                setpickerDate();
+               *//* String[] strings=new String[new Random().nextInt(50)+10];
                 for (int i = 0; i <strings.length; i++) {
                     strings[i]="元素"+i;
                 }
@@ -126,15 +156,81 @@ public class Fragment_rearchtools extends Fragment implements View.OnClickListen
                     public void OnConfirm(int index, String text) {
                         statistics_element.setText(text+"");
                     }
-                });*/
-                break;
+                });*//*
+                break;*/
             case R.id.tools_size:
+                View outerView1 = LayoutInflater.from(getActivity()).inflate(R.layout.wheel_view, null);
+                WheelView wv1 = (WheelView) outerView1.findViewById(R.id.wheel_view_wv);
+                wv1.setOffset(2);
+                wv1.setItems(Arrays.asList(SIZE));
+                wv1.setSeletion(3);
+                wv1.setOnWheelViewListener(new WheelView.OnWheelViewListener() {
+                    @Override
+                    public void onSelected(int selectedIndex, String item) {
+                        mToolsSize.setText(""+item);
+                        Log.d(TAG, "[Dialog]selectedIndex: " + selectedIndex + ", item: " + item);
+                    }
+                });
+
+                new AlertDialog.Builder(getActivity())
+                        .setTitle("请选择型号")
+                        .setView(outerView1)
+                        .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                // setpickerDate();
+                            }
+                        })
+                        .show();
+
                 break;
             case R.id.rearch_btn:
                 setDate();
                 break;
+            case R.id.tools_name:
+                View outerView = LayoutInflater.from(getActivity()).inflate(R.layout.wheel_view, null);
+                WheelView wv = (WheelView) outerView.findViewById(R.id.wheel_view_wv);
+                wv.setOffset(2);
+                wv.setItems(Arrays.asList(PLANETS));
+                wv.setSeletion(3);
+                wv.setOnWheelViewListener(new WheelView.OnWheelViewListener() {
+                    @Override
+                    public void onSelected(int selectedIndex, String item) {
+                        mToolsName.setText(""+item);
+                        Log.d(TAG, "[Dialog]selectedIndex: " + selectedIndex + ", item: " + item);
+                    }
+                });
 
+                new AlertDialog.Builder(getActivity())
+                        .setTitle("请选择")
+                        .setView(outerView)
+                        .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                               // setpickerDate();
+                            }
+                        })
+                        .show();
+
+                break;
         }
+    }
+/*@Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getActivity().getMenuInflater().inflate(R.menu.main, menu);
+        return true;
+    }*/
+
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+
+        if (id == R.id.action_settings) {
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 
     public void setDate(){
