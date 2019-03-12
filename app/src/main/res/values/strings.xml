@@ -20,6 +20,11 @@
     <string name="footer_hint_load_normal">Load more</string>
     <string name="footer_hint_load_ready">Release to load more</string>
 
+    <string name="checkmap_entname_format">popoentname</string>
+    <string name="checkmap_checkdept_format">popocheckdept</string>
+    <string name="checkmap_checkuser_format">popocheckuser</string>
+    <string name="checkmap_checktime_format">popochecktime</string>
+    <string name="app_serviceReturnError">app_serviceReturnError</string>
 
     <string-array name="rearch">
         <item>e1</item>
