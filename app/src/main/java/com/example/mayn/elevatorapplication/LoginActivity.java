@@ -46,6 +46,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
      * 注册
      */
     private TextView mBackReg;
+    private TextView login_recover;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -154,6 +155,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 startActivity(new Intent(LoginActivity.this, RegActivity.class));
                 finish();
                 break;
+            case R.id.login_recover:
+                startActivity(new Intent(LoginActivity.this, RecoverPasswdActivity.class));
+                break;
         }
     }
 
@@ -171,5 +175,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         mLoginCustomer.setOnClickListener(this);
         mBackReg = (TextView) findViewById(R.id.back_reg);
         mBackReg.setOnClickListener(this);
+        login_recover=findViewById(R.id.login_recover);
+        login_recover.setOnClickListener(this);
     }
 }

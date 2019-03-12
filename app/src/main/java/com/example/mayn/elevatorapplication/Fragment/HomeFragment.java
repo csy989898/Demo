@@ -41,8 +41,8 @@ public class HomeFragment extends android.support.v4.app.Fragment implements Vie
 
     private ImageView empty;
     private AutoCompleteTextView search;
-    private String[] str = {"大大大", "大大小", "大小大", "大小小", "小大大", "小大小",
-            "小大小", "小小小","kk", "kk", "wskx", "wksx"};
+    private String[] str = {"aaa", "bbb", "ccc", "ddd", "eee", "fff","ssss", "tttt","uuuu", "vvvv", "www", "xxxx",
+            "gggg", "hhhh","iii", "jjj", "kkkk", "llll","mmm", "nnnn","ooo", "ppp", "qqq", "rrr","yyyy","zzz"};
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {

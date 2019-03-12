@@ -28,7 +28,7 @@
         android:orientation="horizontal">
 
         <Button
-            android:id="@+id/bt"
+            android:id="@+id/map_bt"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -47,6 +47,12 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="普通" />
+        <Button
+            android:id="@+id/button1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="update" />
     </LinearLayout>
 
 

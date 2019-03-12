@@ -1,5 +1,6 @@
 package com.example.mayn.elevatorapplication.Fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -11,9 +12,22 @@ import android.widget.Toast;
 import com.baidu.location.BDLocation;
 import com.baidu.location.BDLocationListener;
 import com.baidu.location.LocationClient;
+import com.baidu.location.LocationClientOption;
 import com.baidu.mapapi.SDKInitializer;
+import com.baidu.mapapi.map.BaiduMap;
+import com.baidu.mapapi.map.BitmapDescriptor;
+import com.baidu.mapapi.map.BitmapDescriptorFactory;
+import com.baidu.mapapi.map.MapStatus;
+import com.baidu.mapapi.map.MapStatusUpdate;
+import com.baidu.mapapi.map.MapStatusUpdateFactory;
+import com.baidu.mapapi.map.MapView;
+import com.baidu.mapapi.map.Marker;
+import com.baidu.mapapi.map.MarkerOptions;
+import com.baidu.mapapi.map.MyLocationData;
+import com.baidu.mapapi.map.OverlayOptions;
 import com.baidu.mapapi.model.LatLng;
 import com.example.mayn.elevatorapplication.R;
+import com.example.mayn.elevatorapplication.RecoverPasswdActivity;
 
 
 public class CleancircleFragment extends Fragment implements View.OnClickListener{
@@ -25,9 +39,10 @@ public class CleancircleFragment extends Fragment implements View.OnClickListene
     private BaiduMap mBaiduMap;
     public LocationClient mLocationClient;
     public BDLocationListener myListener = new MyLocationListener();
-    private Button bt;
+    private Button map_bt;
     private Button button;
     private Button buttons;
+    private Button button1;
     private LatLng latLng;
     private boolean isFirstLoc = true; // 是否首次定位
     private View view;
@@ -35,7 +50,7 @@ public class CleancircleFragment extends Fragment implements View.OnClickListene
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         SDKInitializer.initialize(getActivity().getApplicationContext());
-        view = inflater.inflate(R.layout.activity_home_fragment, container, false);
+        view = inflater.inflate(R.layout.fragment_circle, container, false);
         //在使用SDK各组件之前初始化context信息，传入ApplicationContext
         //注意该方法要再setContentView方法之前实现
 
@@ -45,6 +60,7 @@ public class CleancircleFragment extends Fragment implements View.OnClickListene
 
         return view;
     }
+
 
     private void initMap() {
         //获取地图控件引用
@@ -56,12 +72,12 @@ public class CleancircleFragment extends Fragment implements View.OnClickListene
         //默认显示普通地图
         mBaiduMap.setMapType(BaiduMap.MAP_TYPE_NORMAL);
         //开启交通图
-        //mBaiduMap.setTrafficEnabled(true);
+        mBaiduMap.setTrafficEnabled(true);
         //开启热力图
-        //mBaiduMap.setBaiduHeatMapEnabled(true);
+       // mBaiduMap.setBaiduHeatMapEnabled(true);
         // 开启定位图层
         mBaiduMap.setMyLocationEnabled(true);
-        mLocationClient = new LocationClient(getApplicationContext());     //声明LocationClient类
+        mLocationClient = new LocationClient(getActivity().getApplicationContext());     //声明LocationClient类
         //配置定位SDK参数
         initLocation();
         mLocationClient.registerLocationListener(myListener);    //注册监听函数
@@ -83,7 +99,7 @@ public class CleancircleFragment extends Fragment implements View.OnClickListene
         option.setOpenGps(true);//可选，默认false,设置是否使用gps
         option.setLocationNotify(true);//可选，默认false，设置是否当GPS有效时按照1S/1次频率输出GPS结果
         option.setIsNeedLocationDescribe(true);//可选，默认false，设置是否需要位置语义化结果，可以在BDLocation
-        // .getLocationDescribe里得到，结果类似于“在北京天安门附近”
+        // .getLocationDescribe里得到，结果类似于“在****附近”
         option.setIsNeedLocationPoiList(true);//可选，默认false，设置是否需要POI结果，可以在BDLocation.getPoiList里得到
         option.setIgnoreKillProcess(false);
         option.setOpenGps(true); // 打开gps
@@ -94,11 +110,46 @@ public class CleancircleFragment extends Fragment implements View.OnClickListene
         mLocationClient.setLocOption(option);
     }
 
+    /*显示指定位置的地图*/
+    public void setUpdateDate(){
+        //初始化地图
+        BaiduMap mBaidumap = mMapView.getMap();
+        //设定中心点坐标
+        LatLng cenpt = new LatLng(31.006651,121.45);
+        BitmapDescriptor bitmap = BitmapDescriptorFactory.fromResource(R.mipmap.ico_sign_01);
+        OverlayOptions options= new MarkerOptions() .position(cenpt) .icon(bitmap) .draggable(true); //在地图上添加Marker，并显示
+        mBaiduMap.addOverlay(options);
+
+        //定义地图状态
+        MapStatus mMapStatus = new MapStatus.Builder()
+                .target(cenpt)
+                .zoom(18)
+                .build();
+        //定义MapStatusUpdate对象，以便描述地图状态将要发生的变化
+        MapStatusUpdate mMapStatusUpdate = MapStatusUpdateFactory.newMapStatus(mMapStatus);
+        //改变地图状态
+        mBaidumap.setMapStatus(mMapStatusUpdate);
+    }
+
+    public void setDemo(){
+
+
+    }
+
     //实现BDLocationListener接口,BDLocationListener为结果监听接口，异步获取定位结果
     public class MyLocationListener implements BDLocationListener {
 
         @Override
         public void onReceiveLocation(BDLocation location) {
+            /*
+            百度地图添加自定义Marker图标*/
+            LatLng point = new LatLng(location.getLatitude(), location.getLongitude()); //构建Marker图标
+            BitmapDescriptor bitmap = BitmapDescriptorFactory.fromResource(R.mipmap.ico_sign_02); //构建MarkerOption，用于在地图上添加Marker
+            OverlayOptions options= new MarkerOptions() .position(point) .icon(bitmap) .draggable(true); //在地图上添加Marker，并显示
+            mBaiduMap.addOverlay(options);
+            /*Marker marker;//marker的初始化与要定位的坐标相关
+            marker.setIcon(bitmap);*/
+
             latLng = new LatLng(location.getLatitude(), location.getLongitude());
             // 构造定位数据
             MyLocationData locData = new MyLocationData.Builder()
@@ -140,23 +191,41 @@ public class CleancircleFragment extends Fragment implements View.OnClickListene
         }
     }
 
+    /*
+    * 图标点击事件
+    * */
+    BaiduMap.OnMarkerClickListener onMarkerClickListener = new BaiduMap.OnMarkerClickListener() {
+        @Override
+        public boolean onMarkerClick(Marker marker) {
+            Intent intent = new Intent(getActivity(),RecoverPasswdActivity.class);
+            Bundle bundle = marker.getExtraInfo();
+            int id = bundle.getInt("id");
+            intent.putExtra("id", id);
+            startActivity(intent);
+            return false;
+        }
+    };
+
 
     private void initView() {
         mMapView = (MapView) view.findViewById(R.id.bmapView);
-        bt = (Button) view.findViewById(R.id.bt);
-        bt.setOnClickListener(this);
+        map_bt = (Button) view.findViewById(R.id.map_bt);
+        map_bt.setOnClickListener(this);
         button = (Button) view.findViewById(R.id.button);
         button.setOnClickListener(this);
         buttons = (Button) view.findViewById(R.id.buttons);
         buttons.setOnClickListener(this);
+        button1 = (Button) view.findViewById(R.id.button1);
+        button1.setOnClickListener(this);
     }
 
 
-    /*@Override
+@Override
     public void onDestroyView() {
         super.onDestroyView();
 
-    }*/
+    }
+
 
     @Override
     public void onDestroy() {
@@ -182,7 +251,7 @@ public class CleancircleFragment extends Fragment implements View.OnClickListene
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.bt:
+            case R.id.map_bt:
                 //把定位点再次显现出来
                 MapStatusUpdate mapStatusUpdate = MapStatusUpdateFactory.newLatLng(latLng);
                 mBaiduMap.animateMapStatus(mapStatusUpdate);
@@ -195,8 +264,10 @@ public class CleancircleFragment extends Fragment implements View.OnClickListene
                 //普通地图
                 mBaiduMap.setMapType(BaiduMap.MAP_TYPE_NORMAL);
                 break;
+            case R.id.button1:
+               setUpdateDate();
+                break;
         }
     }
-
 
 }
