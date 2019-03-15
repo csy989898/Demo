@@ -174,7 +174,7 @@
                 android:background="@null"
                 android:gravity="center_vertical"
                 android:hint=""
-                android:inputType="number"
+                android:inputType="textEmailAddress"
                 android:textColor="@android:color/darker_gray"
                 android:textColorHint="@android:color/darker_gray"
                 android:textSize="14sp" />

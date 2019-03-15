@@ -9,6 +9,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.v4.app.Fragment;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -99,6 +100,8 @@ public class CleancircleFragment extends Fragment implements View.OnClickListene
         initView();
         initMap();
         initView1(view);
+        setinitMaps ();
+        test ();
         return view;
     }
 
@@ -165,8 +168,6 @@ public class CleancircleFragment extends Fragment implements View.OnClickListene
         }
     }
 
-
-
     /**
      *@Description: 创建 弹出窗口
      *@param baidumap_infowindow
@@ -221,7 +222,7 @@ public class CleancircleFragment extends Fragment implements View.OnClickListene
     /*显示指定位置的地图*/
     public void setUpdateDate(){
         //初始化地图
-        BaiduMap mBaidumap = mMapView.getMap();
+        mBaiduMap = mMapView.getMap();
         //设定中心点坐标
         LatLng cenpt = new LatLng(31.006651,121.45);
         BitmapDescriptor bitmap = BitmapDescriptorFactory.fromResource(R.mipmap.ico_sign_01);
@@ -236,7 +237,7 @@ public class CleancircleFragment extends Fragment implements View.OnClickListene
         //定义MapStatusUpdate对象，以便描述地图状态将要发生的变化
         MapStatusUpdate mMapStatusUpdate = MapStatusUpdateFactory.newMapStatus(mMapStatus);
         //改变地图状态
-        mBaidumap.setMapStatus(mMapStatusUpdate);
+        mBaiduMap.setMapStatus(mMapStatusUpdate);
     }
 
     //实现BDLocationListener接口,BDLocationListener为结果监听接口，异步获取定位结果
@@ -309,30 +310,12 @@ public class CleancircleFragment extends Fragment implements View.OnClickListene
     @Override
     public void onStart(){
         super.onStart ();
-        setinitMaps ();
-        test ();
+        /*setinitMaps ();
+        test ();*/
     }
 
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        //在activity执行onDestroy时执行mMapView.onDestroy()，实现地图生命周期管理
-        mMapView.onDestroy();
-    }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-        //在activity执行onResume时执行mMapView. onResume ()，实现地图生命周期管理
-        mMapView.onResume();
-    }
 
-    @Override
-    public void onPause() {
-        super.onPause();
-        //在activity执行onPause时执行mMapView. onPause ()，实现地图生命周期管理
-        mMapView.onPause();
-    }
 
     @Override
     public void onClick(View v) {
@@ -367,7 +350,7 @@ public class CleancircleFragment extends Fragment implements View.OnClickListene
                     if (list != null) {
                         showData (list);
                     } else {
-                        Toast.makeText(getActivity(),"app_serviceReturnError",Toast.LENGTH_LONG).show();
+                        Toast.makeText(getActivity(),"app_serviceReturn——-----------Error",Toast.LENGTH_LONG).show();
                     }
                     break;
             }
@@ -383,8 +366,8 @@ public class CleancircleFragment extends Fragment implements View.OnClickListene
         bean.setCheckTime ("2015-09-19");
         bean.setCheckUserNames ("杨攀");
         bean.setRemark1 ("综合科");
-        bean.setCheckX ("39.963175");
-        bean.setCheckY ("116.400244");
+        bean.setCheckX ("31.963175");
+        bean.setCheckY ("121.400244");
 
         list.add (bean);
 
@@ -393,8 +376,8 @@ public class CleancircleFragment extends Fragment implements View.OnClickListene
         bean2.setCheckTime ("2015-09-19");
         bean2.setCheckUserNames ("赵云");
         bean2.setRemark1 ("管理科");
-        bean2.setCheckX ("39.962173");
-        bean2.setCheckY ("116.410294");
+        bean2.setCheckX ("31.962173");
+        bean2.setCheckY ("121.410294");
 
         list.add (bean2);
 
@@ -429,11 +412,12 @@ public class CleancircleFragment extends Fragment implements View.OnClickListene
                 // 构建MarkerOption，用于在地图上添加Marker
                 MarkerOptions options = new MarkerOptions ().position (ll).icon (descriptor);
                 // 在地图上添加Marker，并显示
-                Marker marker = (Marker) mBaiduMap.addOverlay (options);
+                Marker marker1 = (Marker) mBaiduMap.addOverlay (options);
                 // 将信息保存
                 Bundle bundle = new Bundle ();
                 bundle.putSerializable ("marker", bean);
-                marker.setExtraInfo (bundle);
+                Log.e("",""+list.get(1));
+                marker1.setExtraInfo (bundle);
 
                 if (i == 0) {
                     // 把第一个默认为当前的位置图层
@@ -452,6 +436,28 @@ public class CleancircleFragment extends Fragment implements View.OnClickListene
     @Override
     public void onConfigurationChanged(Configuration newConfig){
         super.onConfigurationChanged (newConfig);
+    }
+
+
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        //在activity执行onResume时执行mMapView. onResume ()，实现地图生命周期管理
+        mMapView.onResume();
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        //在activity执行onPause时执行mMapView. onPause ()，实现地图生命周期管理
+        mMapView.onPause();
+    }
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        //在activity执行onDestroy时执行mMapView.onDestroy()，实现地图生命周期管理
+        mMapView.onDestroy();
     }
 
 }

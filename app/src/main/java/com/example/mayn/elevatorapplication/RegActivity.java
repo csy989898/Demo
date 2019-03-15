@@ -2,13 +2,22 @@ package com.example.mayn.elevatorapplication;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.example.mayn.elevatorapplication.OKHTTP.okHTTP;
+import com.fasterxml.jackson.databind.util.JSONPObject;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 public class RegActivity extends AppCompatActivity implements View.OnClickListener {
     /**
@@ -49,6 +58,18 @@ public class RegActivity extends AppCompatActivity implements View.OnClickListen
      */
     private TextView mBackLogin;
 
+
+    Handler myHandler=new Handler(new Handler.Callback() {
+        @Override
+        public boolean handleMessage(Message msg) {
+            String strs=msg.toString().trim();
+            if(msg.what==1){
+                setDate(strs);
+            }
+            return false;
+        }
+    });
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,7 +82,6 @@ public class RegActivity extends AppCompatActivity implements View.OnClickListen
         switch (v.getId()) {
             case R.id.user_regbtn:
                 setRegDate();
-
                 break;
             case R.id.yanzm_btn:
                 num = (int) ((Math.random() * 9 + 1) * 100000);
@@ -74,6 +94,30 @@ public class RegActivity extends AppCompatActivity implements View.OnClickListen
                 break;
         }
     }
+
+    public void setRegesterDate(String json){
+        String ip="192.168.88.36";
+        String portNum="8080";
+        String RegInterface="/a/mobile/userApp/mobileRegister";
+        int msgWhat=1;
+        okHTTP  okHTTP=new okHTTP(json,ip,portNum,RegInterface,msgWhat,myHandler);
+        okHTTP.getConnection();
+    }
+    /*
+    * http://192.168.88.36:8080/a/login/mobile/userApp/mobileRegister
+    * */
+    public void setDate(String str){
+        try {
+            Log.e("Regster--------",""+str);
+            JSONObject jsonObject=new JSONObject(str);
+            String strings=jsonObject.getString("");
+            JSONObject object=new JSONObject(strings);
+            Log.e("Regster",""+object.getString(""));
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
+
 
     public void setRegDate() {
         String UserRegname = mUserName.getText().toString().trim();
@@ -105,18 +149,19 @@ public class RegActivity extends AppCompatActivity implements View.OnClickListen
                 } else if (!UserRegYZM.equals(num + "")) {
                     Toast.makeText(RegActivity.this, "验证码错误",
                             Toast.LENGTH_SHORT).show();
-                } else if (!mUserCheckbox.isChecked()) {
+                } /*else if (!mUserCheckbox.isChecked()) {
                     Toast.makeText(RegActivity.this, "是否同意服务协议",
                             Toast.LENGTH_SHORT).show();
-                } else {
+                } */else {
                     startActivity(new Intent(RegActivity.this, LoginActivity.class));
                     finish();
                 }
-
             }
-
-
         }
+
+         /*userName,password ,email*/
+        String json="{\"userName\":\""+UserRegname+"\",\"password\":\"" + UserRegPasswd + "\",\"email\":\"" + UserRegEmail + "\"}";
+        setRegesterDate(json);
 
 
     }
